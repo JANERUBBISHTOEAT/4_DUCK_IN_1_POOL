@@ -16,26 +16,32 @@ RADIAUS = 1
 NUM_OF_POINTS = 3
 
 # Store the points using polar coordinates
+
+
 class POINT:
     def __init__(self, r, theta):
         self.r = r
         self.theta = theta
         self.x = r * cos(theta)
-        self.y = r * sin(theta) 
-    
+        self.y = r * sin(theta)
+
     # def __str__(self):
     #     return f"({self.x}, {self.y})"
+
 
 def is_in_circle(point):
     return point.r <= RADIAUS
 
+
 def get_random_point():
-    r = random() * RADIAUS # [0, 1) * 1 = [0, 1)]
-    theta = random() * 2 * pi # [0, 1) * 2 * pi = [0, 2pi)
+    r = random() * RADIAUS  # [0, 1) * 1 = [0, 1)]
+    theta = random() * 2 * pi  # [0, 1) * 2 * pi = [0, 2pi)
     return POINT(r, theta)
+
 
 def get_random_points(n):
     return [get_random_point() for _ in range(n)]
+
 
 def get_random_points_in_circle(n):
     cnt = 0
@@ -55,7 +61,8 @@ def get_random_points_in_circle(n):
 # radius_max = 0
 # radius_min = 1
 
-def is_in_same_semicircle_bad(points): # Does not work
+
+def is_in_same_semicircle_bad(points):  # Does not work
     # global delta_min, delta_max
     # global theta_min, theta_max
     # global radius_max, radius_min
@@ -63,8 +70,7 @@ def is_in_same_semicircle_bad(points): # Does not work
     theta = points[0].theta
     max_theta = theta
     min_theta = theta
-    
-    
+
     for point in points:
         if point.theta < min_theta:
             min_theta = point.theta
@@ -99,15 +105,16 @@ def is_in_same_semicircle_bad(points): # Does not work
     #     radius_max = max_radius
     # if radius_min > min_radius:
     #     radius_min = min_radius
-    # print (radius_min, radius_max, end='\r')        
+    # print (radius_min, radius_max, end='\r')
 
     return max_theta - min_theta <= pi
+
 
 def is_in_same_semicircle(points):
     for i in range(len(points)):
         theta = points[i].theta
         bound = (theta + pi) % (2 * pi)
-        
+
         lower_bound = min(theta, bound)
         upper_bound = max(theta, bound)
 
@@ -121,7 +128,7 @@ def is_in_same_semicircle(points):
                 clockwise = True
             if anti_clockwise and clockwise:
                 continue
-        if not (anti_clockwise and clockwise): # At the break condition it works
+        if not (anti_clockwise and clockwise):  # At the break condition it works
             return True
     return False
 
@@ -132,7 +139,8 @@ def main():
     #     print(point.x, point.y)
     # print(is_in_same_semicircle(points))
     # input()
-    return(is_in_same_semicircle(points))
+    return (is_in_same_semicircle(points))
+
 
 if __name__ == '__main__':
     total_trials = 0
@@ -141,10 +149,6 @@ if __name__ == '__main__':
         if main():
             total_success += 1
         total_trials += 1
-        print(str(total_success) + ' / ' + str(total_trials) + ' = ' + str(total_success / total_trials), end='\r')
+        print(str(total_success) + ' / ' + str(total_trials) +
+              ' = ' + str(total_success / total_trials), end='\r')
         # print(total_success / total_trials, end='\r')
-
-            
-
-
-        
