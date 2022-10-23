@@ -13,7 +13,7 @@ from random import random
 from math import sin, cos, pi
 
 RADIAUS = 1
-NUM_OF_POINTS = 3
+NUM_OF_POINTS = 4
 
 # Store the points using polar coordinates
 
@@ -29,13 +29,13 @@ class POINT:
     #     return f"({self.x}, {self.y})"
 
 
-def is_in_circle(point):
-    return point.r <= RADIAUS
+# def is_in_circle(point):
+#     return point.r <= RADIAUS
 
 
 def get_random_point():
-    r = random() * RADIAUS  # [0, 1) * 1 = [0, 1)]
-    theta = random() * 2 * pi  # [0, 1) * 2 * pi = [0, 2pi)
+    r = random() * RADIAUS  # [0, 1)
+    theta = random() * 2 * pi  # [0, 2pi)
     return POINT(r, theta)
 
 
@@ -43,15 +43,17 @@ def get_random_points(n):
     return [get_random_point() for _ in range(n)]
 
 
-def get_random_points_in_circle(n):
-    cnt = 0
-    points = []
-    while cnt < n:
-        point = get_random_point()
-        if is_in_circle(point):
-            points.append(point)
-            cnt += 1
-    return points
+# This function is no longer needed since
+# the random points are defined in the circle already
+# def get_random_points_in_circle(n):
+#     cnt = 0
+#     points = []
+#     while cnt < n:
+#         point = get_random_point()
+#         if is_in_circle(point):
+#             points.append(point)
+#             cnt += 1
+#     return points
 
 # Debug
 # delta_min = pi
@@ -79,21 +81,21 @@ def is_in_same_semicircle_bad(points):  # Does not work
 
     # Debug
 
-    # The extreme delta of theta: [0.054095348103097574, 6.276685361583709] CORRECT
+    # The extreme delta of theta:
     # if delta_min > max_theta - min_theta:
     #     delta_min = max_theta - min_theta
     # if delta_max < max_theta - min_theta:
     #     delta_max = max_theta - min_theta
     # print (delta_min, delta_max, end='\r')
 
-    # The extreme theta: [3.461537651432446e-05, 6.283138923386215] CORRECT
+    # The extreme theta:
     # if theta_min > min_theta:
     #     theta_min = min_theta
     # if theta_max < max_theta:
     #     theta_max = max_theta
     # print (theta_min, theta_max, end='\r')
 
-    # The extreme radius: [5.186086485808872e-07, 0.99998541295420787] CORRECT
+    # The extreme radius:
     # max_radius = 0
     # min_radius = 1
     # for point in points:
@@ -134,7 +136,7 @@ def is_in_same_semicircle(points):
 
 
 def main():
-    points = get_random_points_in_circle(NUM_OF_POINTS)
+    points = get_random_points(NUM_OF_POINTS)
     # for point in points:
     #     print(point.x, point.y)
     # print(is_in_same_semicircle(points))
